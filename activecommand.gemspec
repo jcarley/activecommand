@@ -15,6 +15,7 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.add_dependency 'virtus'
+  spec.add_dependency 'middleware'
   spec.add_dependency 'activesupport'
   spec.add_dependency 'activemodel'
 
