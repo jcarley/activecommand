@@ -19,12 +19,12 @@ module ActiveCommand
       if self.valid?
         self.execute
       else
-        raise ActiveCommand::CommandNotValidError
+        raise ActiveCommand::CommandNotValidError, self.errors.full_messages
       end
     end
 
     def execute
-      raise NotImplementedError
+      raise NotImplementedError, "#{self.class.name} does not implement an execute method"
     end
 
   end
