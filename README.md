@@ -28,7 +28,8 @@ First create your command.  Perhaps adding it to a commands folder under app, if
       - commands
         - SubmitOrderCommand.rb
 
-Then inherit from the base command class and implement an execute method.
+Then inherit from the base command class and implement an execute method.  The following example
+is assuming the Order is an ActiveRecord model and has a submit? method.
 
 ```ruby
 class SubmitOrderCommand < ActiveCommand::Command
@@ -39,9 +40,11 @@ class SubmitOrderCommand < ActiveCommand::Command
 
   def execute
     order = Order.find(order_id)
-    order.submit
-
-    Emailer.send_order_submitted_notification_for(order)
+    if order.submit?
+      Emailer.send_order_submitted_notification_for(order)
+    else
+      raise OrderSubmitError, "Something went wrong submitting the order '#{order_id}'"
+    end
   end
 end
 ```
