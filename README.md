@@ -1,5 +1,7 @@
 # ActiveCommand
 
+[![Build Status](https://travis-ci.org/jcarley/activecommand.svg?branch=master)](https://travis-ci.org/jcarley/activecommand)
+
 ActiveCommand adds the ability to use the command pattern commonly seen in CQRS.
 
 ## Installation
