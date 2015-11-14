@@ -6,12 +6,11 @@ require 'active_command/version'
 Gem::Specification.new do |spec|
   spec.name          = "activecommand"
   spec.version       = ActiveCommand::VERSION
-  spec.authors       = ["jcarley"]
-  spec.email         = ["jcarley@gettyimages.com"]
+  spec.authors       = ["Jefferson Carley"]
+  spec.email         = ["jeff.carley@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{ActiveCommand adds the ability to use the command pattern commonly seen in CQRS.}
+  spec.homepage      = "https://github.com/jcarley/activecommand"
   spec.license       = "MIT"
 
   spec.add_dependency 'virtus'
