@@ -43,7 +43,7 @@ is a CommandResult object.  The Command result will tell you if the command was 
 
 ```ruby
 submit_order_command = SubmitOrderCommand.new
-cr = CommandBus.execute(submit_order_command)
+cr = ActiveCommand::CommandBus.execute(submit_order_command)
 if cr.success?
   redirect "/"
 else
