@@ -38,8 +38,8 @@ end
 ```
 
 Add the desired implementation to the execute method.  In this case, what ever is needed to submit an order. To
-execute the command instantiate it and execute it using the CommandBus.  The returned value from executing the command
-is a CommandResult object.  The Command result will tell you if the command was successful or not.
+execute the command, instantiate it and execute it using the CommandBus.  The returned value from executing the command
+is a CommandResult object.  The CommandResult will tell you if the command was successful or not.
 
 ```ruby
 submit_order_command = SubmitOrderCommand.new
