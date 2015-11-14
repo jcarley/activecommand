@@ -59,7 +59,7 @@ cr = ActiveCommand::CommandBus.execute(submit_order_command)
 if cr.success?
   redirect "/"
 else
-  render "submit_path"
+  render :submit
 end
 ```
 
