@@ -32,7 +32,16 @@ Then inherit from the base command class and implement an execute method.
 
 ```ruby
 class SubmitOrderCommand < ActiveCommand::Command
+
+  attribute :order_id, String
+
+  validates :order_id, presence: true
+
   def execute
+    order = Order.find(order_id)
+    order.submit
+
+    Emailer.send_order_submitted_notification_for(order)
   end
 end
 ```
@@ -42,7 +51,7 @@ execute the command, instantiate it and execute it using the CommandBus.  The re
 is a CommandResult object.  The CommandResult will tell you if the command was successful or not.
 
 ```ruby
-submit_order_command = SubmitOrderCommand.new
+submit_order_command = SubmitOrderCommand.new(:order_id => "ABC123")
 cr = ActiveCommand::CommandBus.execute(submit_order_command)
 if cr.success?
   redirect "/"
