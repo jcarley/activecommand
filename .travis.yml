@@ -6,6 +6,13 @@ before_install: gem install bundler -v 1.10.6
 
 script: 'bundle exec rake'
 
+branches:
+  only:
+    - master
+    - develop
+    - /^feature-.*$/
+    - /^release-.*$/
+
 notifications:
   email:
     recipients:
