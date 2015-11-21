@@ -4,7 +4,7 @@ module ActiveCommand
 
     module ClassMethods
       def set_as_background(value)
-        self.include ActiveCommand::BackgroundCommand if value
+        self.send(:include, ActiveCommand::BackgroundCommand) if value
       end
     end
 
