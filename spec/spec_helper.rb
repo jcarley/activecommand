@@ -2,6 +2,9 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'activecommand'
 require 'json'
 
+ActiveJob::Base.queue_adapter = :inline # default queue adapter
+ActiveJob::Base.logger = nil
+
 RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
 

@@ -1,5 +1,6 @@
 module ActiveCommand
   class Command
+    include Core
     include Virtus.model
     include ActiveModel::Validations
     include ActiveModel::Serializers::JSON

@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'middleware'
   spec.add_dependency 'activesupport'
   spec.add_dependency 'activemodel'
+  spec.add_dependency 'activejob'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
