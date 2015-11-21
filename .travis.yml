@@ -10,8 +10,8 @@ branches:
   only:
     - master
     - develop
-    - /^feature-.*$/
-    - /^release-.*$/
+    - /^feature\/.*$/
+    - /^release\/.*$/
 
 notifications:
   email:
