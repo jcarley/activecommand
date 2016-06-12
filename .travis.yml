@@ -1,7 +1,9 @@
 language: ruby
 rvm:
+  - 2.3.0
   - 2.2.3
   - jruby
+  - jruby-9.0.4.0
 before_install: gem install bundler -v 1.10.6
 
 script: 'bundle exec rake'
