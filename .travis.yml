@@ -6,6 +6,9 @@ rvm:
   - jruby-9.0.4.0
 before_install: gem install bundler -v 1.10.6
 
+env:
+  - JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
+
 script: 'bundle exec rake'
 
 branches:
