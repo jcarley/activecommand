@@ -68,18 +68,46 @@ RSpec.describe ActiveCommand::Command do
 
   describe "#run" do
 
+    it 'queues up the command' do
+      allow(ActiveCommand::Command).to receive(:perform_async)
+      cmd = ActiveCommand::Command.new
+      cmd.run
+      expect(ActiveCommand::Command).to have_received(:perform_async).with("{}")
+    end
+
+  end
+
+  describe "#perform" do
+
+    it 'repopulates the attributes of the command and executes it' do
+      cmd = ActiveCommand::Command.new.tap do |c|
+        allow(c).to receive(:from_json)
+        allow(c).to receive(:execute)
+        allow(c).to receive(:perform_now).and_call_original
+      end
+      cmd.perform('{"name":"bob"}')
+      aggregate_failures do
+        expect(cmd).to have_received(:from_json).with('{"name":"bob"}')
+        expect(cmd).to have_received(:perform_now)
+      end
+    end
+
+  end
+
+  describe "#perform_now" do
+
     it "checks if the command is valid" do
       cmd = ActiveCommand::Command.new
       allow(cmd).to receive(:valid?).and_return(true)
       allow(cmd).to receive(:execute)
-      cmd.run
+      cmd.perform_now
       expect(cmd).to have_received(:valid?)
     end
 
     it "calls execute when the command is valid" do
       cmd = ActiveCommand::Command.new
       allow(cmd).to receive(:execute)
-      cmd.run
+      cmd.perform_now
       expect(cmd).to have_received(:execute)
     end
 
@@ -88,7 +116,7 @@ RSpec.describe ActiveCommand::Command do
       allow(cmd).to receive(:execute)
       allow(cmd).to receive(:valid?).and_return(false)
       aggregate_failures "tesing run" do
-        expect { cmd.run }.to raise_error(ActiveCommand::CommandNotValidError)
+        expect { cmd.perform_now }.to raise_error(ActiveCommand::CommandNotValidError)
         expect(cmd).to_not have_received(:execute)
       end
     end

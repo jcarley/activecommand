@@ -1,11 +1,16 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'activecommand'
 require 'json'
+require 'sidekiq/testing'
+require 'activecommand'
 
-ActiveJob::Base.queue_adapter = :inline # default queue adapter
-ActiveJob::Base.logger = nil
+Sidekiq::Testing.fake!
 
 RSpec.configure do |config|
+
+  config.before(:each) do
+    Sidekiq::Worker.clear_all
+  end
+
   config.mock_with :rspec do |mocks|
 
     # This option should be set when all dependencies are being loaded

@@ -8,7 +8,18 @@ module ActiveCommand
     end
 
     def execute(command)
-      env = {:command => command}
+      env = {:command => command, :at => :later}
+      default_middleware.call(env)
+      env[:command_result]
+    end
+
+    def self.execute_now(command)
+      bus = self.instance
+      bus.execute_now(command)
+    end
+
+    def execute_now(command)
+      env = {:command => command, :at => :now}
       default_middleware.call(env)
       env[:command_result]
     end

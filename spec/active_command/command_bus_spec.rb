@@ -27,8 +27,9 @@ RSpec.describe ActiveCommand::CommandBus do
   describe ".execute" do
 
     it "executes a command" do
-      ActiveCommand::CommandBus.execute(noop_command)
-      expect(noop_command).to have_received(:execute)
+      expect {
+        ActiveCommand::CommandBus.execute(noop_command)
+      }.to change(noop_command.class.jobs, :size).by(1)
     end
 
     it "returns a command result" do
@@ -42,8 +43,9 @@ RSpec.describe ActiveCommand::CommandBus do
 
     it "executes a command" do
       cmd_bus = ActiveCommand::CommandBus.instance
-      cmd_bus.execute(noop_command)
-      expect(noop_command).to have_received(:execute)
+      expect {
+        cmd_bus.execute(noop_command)
+      }.to change(noop_command.class.jobs, :size).by(1)
     end
 
     it "returns a command result" do
@@ -52,6 +54,24 @@ RSpec.describe ActiveCommand::CommandBus do
       expect(cmd_result).to be_instance_of(ActiveCommand::CommandResult)
     end
 
+  end
+
+  describe ".execute_now" do
+
+    it 'executes a command immediately' do
+      ActiveCommand::CommandBus.execute_now(noop_command)
+      expect(noop_command).to have_received(:execute)
+    end
+
+  end
+
+  describe "#execute_now" do
+
+    it 'executes a cmmand immediately' do
+      cmd_bus = ActiveCommand::CommandBus.instance
+      cmd_result = cmd_bus.execute_now(noop_command)
+      expect(noop_command).to have_received(:execute)
+    end
   end
 
 end
