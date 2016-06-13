@@ -20,12 +20,24 @@ RSpec.describe ActiveCommand::CommandRunner do
 
     end
 
-    it "runs the command" do
-      command = double("command", :run => nil)
-      env = {:command => command}
-      subject.call(env)
-      cr = env.fetch(:command_result)
-      expect(command).to have_received(:run)
+    describe 'async commands' do
+      it "calls runs on the command" do
+        command = double("command", :run => nil)
+        env = {:command => command, :at => :later}
+        subject.call(env)
+        cr = env.fetch(:command_result)
+        expect(command).to have_received(:run)
+      end
+    end
+
+    describe 'sync commands' do
+      it 'calls perform_now on the command' do
+        command = double("command", :perform_now => nil)
+        env = {:command => command, :at => :now}
+        subject.call(env)
+        cr = env.fetch(:command_result)
+        expect(command).to have_received(:perform_now)
+      end
     end
 
     it "when successful it returns a command result with no errors" do

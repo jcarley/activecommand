@@ -1,8 +1,12 @@
 language: ruby
 rvm:
+  - 2.3.0
   - 2.2.3
-  - jruby
+  - jruby-9.1.2.0
 before_install: gem install bundler -v 1.10.6
+
+env:
+  - JAVA_TOOL_OPTIONS="-Dfile.encoding=UTF8"
 
 script: 'bundle exec rake'
 
@@ -10,8 +14,8 @@ branches:
   only:
     - master
     - develop
-    - /^feature-.*$/
-    - /^release-.*$/
+    - /^feature\/.*$/
+    - /^release\/.*$/
 
 notifications:
   email:
