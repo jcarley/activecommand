@@ -17,6 +17,7 @@ module ActiveCommand
 
   autoload_under 'middleware' do
     autoload :CommandRunner
+    autoload :CommandLogger
   end
 
 end

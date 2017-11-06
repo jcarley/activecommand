@@ -29,6 +29,7 @@ module ActiveCommand
     def default_middleware
       @stack ||= Middleware::Builder.new do
         # use ActiveCommand::Middleware::Benchmarker
+        use ActiveCommand::CommandLogger
         use ActiveCommand::CommandRunner
       end
       @stack
