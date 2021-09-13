@@ -13,11 +13,11 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/jcarley/activecommand"
   spec.license       = "MIT"
 
-  spec.add_dependency 'virtus'
-  spec.add_dependency 'middleware'
-  spec.add_dependency 'activesupport'
-  spec.add_dependency 'activemodel'
-  spec.add_dependency 'sidekiq'
+  spec.add_runtime_dependency 'virtus', '~> 2.0', '>= 2.0.0'
+  spec.add_runtime_dependency 'middleware', '~> 0.1', '>= 0.1.0'
+  spec.add_runtime_dependency 'activesupport', '~> 6.0', '>= 6.0.0'
+  spec.add_runtime_dependency 'activemodel', '~> 6.0', '>= 6.0.0'
+  spec.add_runtime_dependency 'sidekiq', '~> 6.0', '>= 6.0.0'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
@@ -34,5 +34,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 2.1.4"
   spec.add_development_dependency "rake", "~> 13.0.6"
-  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "rspec", "~> 3.10.0"
 end
