@@ -19,5 +19,9 @@ module ActiveCommand
     autoload :CommandRunner
   end
 
+  def self.execute_now(command)
+    CommandBus.execute_now(command)
+  end
+
 end
 
